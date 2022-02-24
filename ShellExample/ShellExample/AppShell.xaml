@@ -61,21 +61,20 @@
                     <VisualStateGroup x:Name="CommonStates">
                         <VisualState x:Name="Normal">
                             <VisualState.Setters>
-                                <!-- TODO <Setter Property="FontImageSource.Color" Value="{StaticResource PrimaryUnselectedTextColorLight}" /> -->
                                 <!-- This is the color of the unselected text for the labels in the flyout-->
-                                <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource FlyoutUnselectedTextColorLight}" />
-                                <Setter TargetName="FlyoutItemLabel" Property="Label.BackgroundColor" Value="{StaticResource FlyoutUnselectedBackgroundColorLight}" />
+                                <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="Magenta" />
+                                <Setter TargetName="FlyoutItemLabel" Property="Label.BackgroundColor" Value="Cyan" />
                                 <!-- This is the background color of the selected icon in the flyout -->
-                                <Setter Property="BackgroundColor" Value="{StaticResource FlyoutUnselectedBackgroundColorLight}" />
+                                <Setter Property="BackgroundColor" Value="Green" />
                             </VisualState.Setters>
                         </VisualState>
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
                                 <!-- This is the color of the selected text in the flyout -->
-                                <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource FlyoutSelectedTextColorLight}"/>
-                                <Setter TargetName="FlyoutItemLabel" Property="Label.BackgroundColor" Value="{StaticResource FlyoutSelectedBackgroundColorLight}" />
+                                <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="Black"/>
+                                <Setter TargetName="FlyoutItemLabel" Property="Label.BackgroundColor" Value="Yellow" />
                                 <!-- This is the background color of the selected icon in the flyout -->
-                                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColorLight}" />
+                                <Setter Property="BackgroundColor" Value="Red" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
