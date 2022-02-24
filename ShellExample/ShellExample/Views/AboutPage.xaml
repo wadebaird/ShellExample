@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:ShellExample.Views"
+             x:Class="ShellExample.Views.AboutPage"
+             Title="About"
+             x:DataType="views:AboutPage">
+    <ScrollView>
+        <StackLayout Margin="30" Padding="0">
+            <Label FontSize="Medium" FontAttributes="Bold" Text="Application Development Information:" />
+            <Label FontSize="Body">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <FormattedString.Spans>
+                            <Span Text="This application has been developed in partnership with Sunbreak Software, LLC. If you would like a similiar application implemented for you, please contact us at " />
+                            <Span Text="www.sunbreaksoftware.com" FontAttributes="Italic" TextDecorations="Underline" TextColor="Blue">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type views:AboutPage}}, Path=HyperlinkCommand}"
+                                        CommandParameter="http://www.sunbreaksoftware.com">
+                                    </TapGestureRecognizer>
+                                </Span.GestureRecognizers>
+                            </Span>
+                            <Span Text="."/>
+                        </FormattedString.Spans>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </StackLayout>
+    </ScrollView>
+</views:BaseContentPage>

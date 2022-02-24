@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- This is the background color for the icons-->
+    <color name="launcher_background">#FFFFFF</color>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#000000</color>
+	<!-- This is the background color for the launchImage screen-->
+	<color name="launcherImage_background">#000000</color>
+</resources>

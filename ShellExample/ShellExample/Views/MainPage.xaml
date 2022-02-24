@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:ShellExample.Views.Controls"
+             xmlns:fontAwesome="clr-namespace:FontAwesome;assembly=Sunbreak.Common"
+             xmlns:viewModels="clr-namespace:ShellExample.ViewModels"
+             xmlns:views="clr-namespace:ShellExample.Views"
+             x:Class="ShellExample.Views.MainPage"
+             x:DataType="viewModels:MainPageViewModel">
+    <views:BaseContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding ShareCurrentEntityCommand}" Text="Share">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Size="{StaticResource ToolbarIconSize}" Glyph="{x:Static fontAwesome:FontAwesomeIcons.Share}" FontFamily="FA-Solid" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem Command="{Binding LoadTodaysEntityCommand}" Text="Today">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Size="{StaticResource ToolbarIconSize}" Glyph="{x:Static fontAwesome:FontAwesomeIcons.CalendarDay}" FontFamily="FA-Solid" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <!--Need to bind the IconImageSource due to this bug: https://github.com/xamarin/Xamarin.Forms/issues/6593 -->
+        <ToolbarItem Command="{Binding SetFavoriteCommand}" IconImageSource="{Binding FontImageSource}" />
+    </views:BaseContentPage.ToolbarItems>
+    <views:BaseContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
+    </views:BaseContentPage.Resources>
+    <!-- This StackLayout needs to be here for this bug (or one like it): https://github.com/xamarin/Xamarin.Forms/issues/13398-->
+    <StackLayout x:Name="topStackLayout">
+        <controls:GestureScrollView>
+            <controls:GestureScrollView.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Left" Swiped="Swipe"/>
+                <SwipeGestureRecognizer Direction="Right" Swiped="Swipe"/>
+            </controls:GestureScrollView.GestureRecognizers>
+            <StackLayout Margin="20">
+                <Label Text="The Completed event is used to react to the completion of an interaction with an Editor. Completed is raised when the user ends input with a field by entering the return key on the keyboard (or by pressing the Tab key on UWP). The handler for the event is a generic event handler, taking the sender and EventArgs:" FontAttributes="Bold,Italic" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="{StaticResource EntitySayingFontSize}" />
+            </StackLayout>
+        </controls:GestureScrollView>
+    </StackLayout>
+</views:BaseContentPage>

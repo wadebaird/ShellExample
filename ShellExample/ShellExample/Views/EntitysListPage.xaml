@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShellExample.Views.EntitysListPage"
+             xmlns:models="clr-namespace:ShellExample.Models"
+             xmlns:viewModels="clr-namespace:ShellExample.ViewModels"
+             xmlns:views="clr-namespace:ShellExample.Views"
+             Title="{Binding Title}"
+             x:DataType="viewModels:EntitysListViewModel">
+    <CollectionView ItemsSource="{Binding Items}" SelectionMode="None" >
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <StackLayout Padding="5,10,10,5" x:DataType="models:Entity">
+                    <Label LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="{StaticResource StandardLabelFontSize}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span Text="{Binding Date, StringFormat='{0:MMMM d}'}" />
+                                    <Span Text=": " />
+                                    <Span Text="{Binding Title}" />
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <BoxView HeightRequest="1" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:EntitysListViewModel}}, Path=ItemTappedCommand}"
+                                CommandParameter="{Binding .}">
+                        </TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</views:BaseContentPage>

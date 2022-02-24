@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:bsc="clr-namespace:ShellExample"
+             xmlns:converters="clr-namespace:ShellExample.Views.Converters"
+             x:Class="ShellExample.App">
+    <Application.Resources>
+
+        <ResourceDictionary MergedWith="bsc:Colors" />
+        <ResourceDictionary MergedWith="bsc:FontResources" />
+        
+        <converters:ArrayIndexConverter x:Key="ArrayIndex"/>
+        <Style TargetType="Button">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColorLight}"/>
+                                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColorLight}"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="{StaticResource ButtonDisabledTextColorLight}"/>
+                                <Setter Property="BackgroundColor" Value="{StaticResource ButtonDisabledBackgroundColorLight}"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </Application.Resources>
+</Application>

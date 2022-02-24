@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShellExample.Colors">
+
+    <!-- *********** Light Theme Colors *********** -->
+    <Color x:Key="PrimaryColorLight">#2196F3</Color>
+    <Color x:Key="PrimaryTextColorLight">White</Color>
+    <Color x:Key="PrimaryUnselectedTextColorLight">#95FFFFFF</Color>
+
+    <Color x:Key="FlyoutBackgroundColorLight">White</Color>
+    <Color x:Key="FlyoutUnselectedBackgroundColorLight">White</Color>
+    <!--Same as PrimaryColor-->
+    <Color x:Key="FlyoutUnselectedTextColorLight">#2196F3</Color>
+    <!--Same as PrimaryColor-->
+    <Color x:Key="FlyoutSelectedBackgroundColorLight">#2196F3</Color>
+    <Color x:Key="FlyoutSelectedTextColorLight">White</Color>
+
+    <Color x:Key="StandardContentTextColorLight">Black</Color>
+
+    <Color x:Key="ContentPageBackgroundColorLight">White</Color>
+    <Color x:Key="ListPageSeperatorColorLight">Silver</Color>
+    <Color x:Key="EntryPlaceholderColorLight"></Color>
+
+    <Color x:Key="ButtonDisabledBackgroundColorLight">#332196F3</Color>
+    <Color x:Key="ButtonDisabledTextColorLight">White</Color>
+
+    <!-- *********** Dark Theme Colors *********** -->
+    <Color x:Key="PrimaryColorDark">#2196F3</Color>
+    <Color x:Key="PrimaryTextColorDark">Black</Color>
+    <Color x:Key="PrimaryUnselectedTextColorDark">#95FFFFFF</Color>
+
+    <Color x:Key="FlyoutBackgroundColorDark">Black</Color>
+    <Color x:Key="FlyoutUnselectedBackgroundColorDark">White</Color>
+    <!--Same as PrimaryColor-->
+    <Color x:Key="FlyoutUnselectedTextColorDark">#2196F3</Color>
+    <!--Same as PrimaryColor-->
+    <Color x:Key="FlyoutSelectedBackgroundColorDark">#2196F3</Color>
+    <Color x:Key="FlyoutSelectedTextColorDark">White</Color>
+
+    <Color x:Key="StandardContentTextColorDark">White</Color>
+
+    <Color x:Key="ContentPageBackgroundColorDark">Black</Color>
+    <Color x:Key="ListPageSeperatorColorDark">Silver</Color>
+    <Color x:Key="EntryPlaceholderColorDark"></Color>
+    
+    <Color x:Key="ButtonDisabledBackgroundColorDark">#332196F3</Color>
+    <Color x:Key="ButtonDisabledTextColorDark">White</Color>
+</ResourceDictionary>

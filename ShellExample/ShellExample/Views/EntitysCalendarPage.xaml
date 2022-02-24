@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShellExample.Views.EntitysCalendarPage"
+             xmlns:controls="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar"
+             xmlns:viewModels="clr-namespace:ShellExample.ViewModels"
+             xmlns:views="clr-namespace:ShellExample.Views"
+             Title="{Binding Title}"
+             x:DataType="viewModels:EntitysCalendarViewModel">
+    <controls:Calendar x:Name="CalendarControl" SelectedDate="{Binding SelectedDate}" MonthYear="{Binding MonthYear}" 
+        OtherMonthDayIsVisible="False"
+        ShowYearPicker="False" DayTappedCommand="{Binding DayTappedCommand}" FooterSectionVisible="False" 
+        VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+        MonthLabelColor="{StaticResource StandardContentTextColorLight}"/>
+</views:BaseContentPage>

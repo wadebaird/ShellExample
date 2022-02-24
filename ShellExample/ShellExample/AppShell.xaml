@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:root="clr-namespace:ShellExample" 
+       xmlns:fontAwesome="clr-namespace:FontAwesome;assembly=Sunbreak.Common"
+       xmlns:views="clr-namespace:ShellExample.Views" 
+       x:DataType="root:AppShell"
+       x:Class="ShellExample.AppShell"
+       FlyoutBackgroundColor="{StaticResource FlyoutBackgroundColorLight}">
+    <!-- The overall app visual hierarchy is defined here, along with navigation.
+         https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/ -->
+    <Shell.Resources>
+        <Style x:Key="BaseStyle" TargetType="Element" ApplyToDerivedTypes="true">
+            <Setter Property="Shell.BackgroundColor" Value="{StaticResource PrimaryColorLight}" />
+            <!-- This is the color of the buttons in the toolbar and the flyout icon -->
+            <Setter Property="Shell.ForegroundColor" Value="{StaticResource PrimaryTextColorLight}" />
+            <!-- These colors are for the title bars in flyout pages -->
+            <!-- This is the color of the title of the page in the top toolbar -->
+            <Setter Property="Shell.TitleColor" Value="{StaticResource PrimaryTextColorLight}" />
+            <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+            <!-- This is the color of the unselected tabs in the List pages view -->
+            <Setter Property="Shell.UnselectedColor" Value="{StaticResource PrimaryUnselectedTextColorLight}" />
+            <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource PrimaryColorLight}" />
+            <Setter Property="Shell.TabBarDisabledColor" Value="Magenta"/>
+            <Setter Property="Shell.TabBarForegroundColor" Value="Magenta"/>
+            <!-- This is the color of the unselected pages in the bottom tab bar -->
+            <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource PrimaryUnselectedTextColorLight}"/>
+            <!-- This is the color of the selected page in the bottom tab bar -->
+            <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource PrimaryTextColorLight}"/>
+        </Style>
+        <Style TargetType="ContentPage" ApplyToDerivedTypes="true" BasedOn="{StaticResource BaseStyle}">
+            <Setter Property="BackgroundColor" Value="{StaticResource ContentPageBackgroundColorLight}"/>
+        </Style>
+        <Style TargetType="Entry" BasedOn="{StaticResource BaseStyle}" ApplyToDerivedTypes="True">
+            <Setter Property="FontSize" Value="{StaticResource StandardLabelFontSize}" />
+            <Setter Property="TextColor" Value="{StaticResource StandardContentTextColorLight}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource ContentPageBackgroundColorLight}"/>
+            <Setter Property="PlaceholderColor" Value="{StaticResource EntryPlaceholderColorLight}"/>
+        </Style>
+        <Style TargetType="Label" BasedOn="{StaticResource BaseStyle}" >
+            <Setter Property="LineHeight" Value="{StaticResource LabelSpacingSize}"/>
+            <Setter Property="FontSize" Value="{StaticResource StandardLabelFontSize}" />
+            <Setter Property="TextColor" Value="{StaticResource StandardContentTextColorLight}" />
+        </Style>
+        <Style TargetType="BoxView" BasedOn="{StaticResource BaseStyle}">
+            <Setter Property="Color" Value="{StaticResource ListPageSeperatorColorLight}" />
+        </Style>
+        <Style TargetType="Shell" BasedOn="{StaticResource BaseStyle}" />
+        <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+        <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+
+        <!-- Default Styles for all Flyout Items
+            https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyoutitem-and-menuitem-style-classes -->
+        <Style Class="FlyoutItemLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="{StaticResource FlyoutLabelFontSize}"/>
+            <Setter Property="TextColor" Value="{StaticResource PrimaryTextColorLight}"/>
+        </Style>
+        <Style x:Name="FlyoutItem" Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <!-- TODO <Setter Property="FontImageSource.Color" Value="{StaticResource PrimaryUnselectedTextColorLight}" /> -->
+                                <!-- This is the color of the unselected text for the labels in the flyout-->
+                                <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource FlyoutUnselectedTextColorLight}" />
+                                <Setter TargetName="FlyoutItemLabel" Property="Label.BackgroundColor" Value="{StaticResource FlyoutUnselectedBackgroundColorLight}" />
+                                <!-- This is the background color of the selected icon in the flyout -->
+                                <Setter Property="BackgroundColor" Value="{StaticResource FlyoutUnselectedBackgroundColorLight}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <!-- This is the color of the selected text in the flyout -->
+                                <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource FlyoutSelectedTextColorLight}"/>
+                                <Setter TargetName="FlyoutItemLabel" Property="Label.BackgroundColor" Value="{StaticResource FlyoutSelectedBackgroundColorLight}" />
+                                <!-- This is the background color of the selected icon in the flyout -->
+                                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColorLight}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
+        <!-- Custom Style you can apply to any Flyout Item -->
+        <Style Class="MenuItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="Magenta" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </Shell.Resources>
+
+    <!-- 
+        When the Flyout is visible this defines the content to display in the flyout.
+        FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element    
+        https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
+    -->
+    <FlyoutItem Route="root" Title="Entitys" FlyoutDisplayOptions="AsMultipleItems">
+        <FlyoutItem.Icon>
+            <FontImageSource Size="{StaticResource FlyoutIconSize}" Glyph="{x:Static fontAwesome:FontAwesomeIcons.BookOpen}" FontFamily="FA-Solid" />
+        </FlyoutItem.Icon>
+        <ShellContent Route="mainPage" Title="Entity" ContentTemplate="{DataTemplate views:MainPage}">
+            <ShellContent.Icon>
+                <FontImageSource Size="{StaticResource FlyoutIconSize}" Glyph="{x:Static fontAwesome:FontAwesomeIcons.BookOpen}" FontFamily="FA-Solid" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent Route="favoritesPage" Title="Favorites" ContentTemplate="{DataTemplate views:FavoritesPage}">
+            <ShellContent.Icon>
+                <FontImageSource Size="{StaticResource FlyoutIconSize}" Glyph="{x:Static fontAwesome:FontAwesomeIcons.Star}" FontFamily="FA-Solid" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <Tab Route="entitys" Title="Entitys">
+            <Tab.Icon>
+                <FontImageSource Size="{StaticResource FlyoutIconSize}" Glyph="{x:Static fontAwesome:FontAwesomeIcons.Book}" FontFamily="FA-Solid" />
+            </Tab.Icon>
+            <ShellContent Route="entitysCalendar" Title="Calendar" ContentTemplate="{DataTemplate views:EntitysCalendarPage}" />
+            <ShellContent Route="entitysList" Title="List" ContentTemplate="{DataTemplate views:EntitysListPage}" />
+        </Tab>
+    </FlyoutItem>
+    <!-- Modify the code in the AppShell() constructor that adds the Data Pages if you add more 
+         Pages here.-->
+    <ShellContent Route="aboutPage" Title="About" ContentTemplate="{DataTemplate views:AboutPage}" >
+        <ShellContent.Icon>
+            <FontImageSource Size="{StaticResource FlyoutIconSize}" Glyph="{x:Static fontAwesome:FontAwesomeIcons.InfoCircle}" FontFamily="FA-Solid" />
+        </ShellContent.Icon>
+    </ShellContent>
+
+    <!-- Optional Templates 
+    // These may be provided inline as below or as separate classes.
+
+    // This header appears at the top of the Flyout.
+    // https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyout-header
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid>ContentHere</Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+    // ItemTemplate is for ShellItems as displayed in a Flyout
+    // https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#define-flyoutitem-appearance
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <ContentView>
+                Bindable Properties: Title, Icon
+            </ContentView>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    // MenuItemTemplate is for MenuItems as displayed in a Flyout
+    // https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#define-menuitem-appearance
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <ContentView>
+                Bindable Properties: Text, Icon
+            </ContentView>
+        </DataTemplate>
+    </Shell.MenuItemTemplate>
+    -->
+</Shell>
