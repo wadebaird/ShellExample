@@ -49,53 +49,6 @@
         <Style TargetType="Shell" BasedOn="{StaticResource BaseStyle}" />
         <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
         <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
-
-        <!-- Default Styles for all Flyout Items
-            https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyoutitem-and-menuitem-style-classes -->
-        <Style Class="FlyoutItemLabelStyle" TargetType="Label">
-            <Setter Property="FontSize" Value="{StaticResource FlyoutLabelFontSize}"/>
-            <Setter Property="TextColor" Value="{StaticResource PrimaryTextColorLight}"/>
-        </Style>
-        <Style x:Name="FlyoutItem" Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
-            <Setter Property="VisualStateManager.VisualStateGroups">
-                <VisualStateGroupList>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal">
-                            <VisualState.Setters>
-                                <!-- This is the color of the unselected text for the labels in the flyout-->
-                                <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="Magenta" />
-                                <Setter TargetName="FlyoutItemLabel" Property="Label.BackgroundColor" Value="Cyan" />
-                                <!-- This is the background color of the selected icon in the flyout -->
-                                <Setter Property="BackgroundColor" Value="Green" />
-                            </VisualState.Setters>
-                        </VisualState>
-                        <VisualState x:Name="Selected">
-                            <VisualState.Setters>
-                                <!-- This is the color of the selected text in the flyout -->
-                                <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="Black"/>
-                                <Setter TargetName="FlyoutItemLabel" Property="Label.BackgroundColor" Value="Yellow" />
-                                <!-- This is the background color of the selected icon in the flyout -->
-                                <Setter Property="BackgroundColor" Value="Red" />
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateGroupList>
-            </Setter>
-        </Style>
-       <!-- Custom Style you can apply to any Flyout Item -->
-        <Style Class="MenuItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
-            <Setter Property="VisualStateManager.VisualStateGroups">
-                <VisualStateGroupList>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal">
-                            <VisualState.Setters>
-                                <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="Magenta" />
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateGroupList>
-            </Setter>
-        </Style>
     </Shell.Resources>
     <Shell.ItemTemplate>
         <DataTemplate x:DataType="root:IShellIconFont">
@@ -132,7 +85,7 @@
                     <ColumnDefinition Width="0.8*" />
                 </Grid.ColumnDefinitions>
                 <Label x:Name="FlyoutItemIcon" Grid.Column="0" FontFamily="FA-Solid" FontSize="{StaticResource FlyoutIconSize}"
-                        Text="{Binding Glyph}" TextColor="{Binding Source={x:Reference FlyoutItemLabel}, Path=TextColor}"
+                        Text="{Binding ., Converter={StaticResource FlyoutGlyph}}" TextColor="{Binding Source={x:Reference FlyoutItemLabel}, Path=TextColor}"
                         VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
                         Margin="0" Padding="0"/>
                 <Label x:Name="FlyoutItemLabel" Grid.Column="1" Text="{Binding Title}" FontSize="{StaticResource FlyoutLabelFontSize}" 
@@ -148,5 +101,28 @@
             <ShellContent Route="entitysList" Title="List" ContentTemplate="{DataTemplate views:EntitysListPage}" />
         </root:TabIconFont>
     </FlyoutItem>
-    <root:ShellContentIconFont Route="aboutPage" Title="About" Glyph="{x:Static fontAwesome:FontAwesomeIcons.InfoCircle}" ContentTemplate="{DataTemplate views:AboutPage}" />
+    <FlyoutItem Route="root" Title="Entitys" FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Route="mainPage" Title="Entity" ContentTemplate="{DataTemplate views:MainPage}">
+            <ShellContent.Icon>
+                <FontImageSource Size="{StaticResource FlyoutIconSize}" Glyph="{x:Static fontAwesome:FontAwesomeIcons.BookOpen}" FontFamily="FA-Solid" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent Route="favoritesPage" Title="Favorites" ContentTemplate="{DataTemplate views:FavoritesPage}">
+            <ShellContent.Icon>
+                <FontImageSource Size="{StaticResource FlyoutIconSize}" Glyph="{x:Static fontAwesome:FontAwesomeIcons.Star}" FontFamily="FA-Solid" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <Tab Route="entitys" Title="Entitys">
+            <Tab.Icon>
+                <FontImageSource Size="{StaticResource FlyoutIconSize}" Glyph="{x:Static fontAwesome:FontAwesomeIcons.Book}" FontFamily="FA-Solid" />
+            </Tab.Icon>
+            <ShellContent Route="entitysCalendar" Title="Calendar" ContentTemplate="{DataTemplate views:EntitysCalendarPage}" />
+            <ShellContent Route="entitysList" Title="List" ContentTemplate="{DataTemplate views:EntitysListPage}" />
+        </Tab>
+    </FlyoutItem>
+    <ShellContent Route="aboutPage" Title="About" ContentTemplate="{DataTemplate views:AboutPage}" >
+        <ShellContent.Icon>
+            <FontImageSource Size="{StaticResource FlyoutIconSize}" Glyph="{x:Static fontAwesome:FontAwesomeIcons.InfoCircle}" FontFamily="FA-Solid" />
+        </ShellContent.Icon>
+    </ShellContent>
 </Shell>

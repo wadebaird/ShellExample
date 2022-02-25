@@ -8,8 +8,9 @@
 
         <ResourceDictionary MergedWith="bsc:Colors" />
         <ResourceDictionary MergedWith="bsc:FontResources" />
+
+        <converters:FlyoutGlyphConverter x:Key="FlyoutGlyph"/>
         
-        <converters:ArrayIndexConverter x:Key="ArrayIndex"/>
         <Style TargetType="Button">
             <Setter Property="VisualStateManager.VisualStateGroups">
                 <VisualStateGroupList>
