@@ -2,6 +2,7 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:root="clr-namespace:ShellExample" 
+       xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
        xmlns:fontAwesome="clr-namespace:FontAwesome;assembly=Sunbreak.Common"
        xmlns:views="clr-namespace:ShellExample.Views" 
        x:DataType="root:AppShell"
@@ -81,8 +82,7 @@
                 </VisualStateGroupList>
             </Setter>
         </Style>
-
-        <!-- Custom Style you can apply to any Flyout Item -->
+       <!-- Custom Style you can apply to any Flyout Item -->
         <Style Class="MenuItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
             <Setter Property="VisualStateManager.VisualStateGroups">
                 <VisualStateGroupList>
@@ -97,71 +97,56 @@
             </Setter>
         </Style>
     </Shell.Resources>
-
-    <!-- 
-        When the Flyout is visible this defines the content to display in the flyout.
-        FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element    
-        https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
-    -->
-    <FlyoutItem Route="root" Title="Entitys" FlyoutDisplayOptions="AsMultipleItems">
-        <FlyoutItem.Icon>
-            <FontImageSource Size="{StaticResource FlyoutIconSize}" Glyph="{x:Static fontAwesome:FontAwesomeIcons.BookOpen}" FontFamily="FA-Solid" />
-        </FlyoutItem.Icon>
-        <ShellContent Route="mainPage" Title="Entity" ContentTemplate="{DataTemplate views:MainPage}">
-            <ShellContent.Icon>
-                <FontImageSource Size="{StaticResource FlyoutIconSize}" Glyph="{x:Static fontAwesome:FontAwesomeIcons.BookOpen}" FontFamily="FA-Solid" />
-            </ShellContent.Icon>
-        </ShellContent>
-        <ShellContent Route="favoritesPage" Title="Favorites" ContentTemplate="{DataTemplate views:FavoritesPage}">
-            <ShellContent.Icon>
-                <FontImageSource Size="{StaticResource FlyoutIconSize}" Glyph="{x:Static fontAwesome:FontAwesomeIcons.Star}" FontFamily="FA-Solid" />
-            </ShellContent.Icon>
-        </ShellContent>
-        <Tab Route="entitys" Title="Entitys">
-            <Tab.Icon>
-                <FontImageSource Size="{StaticResource FlyoutIconSize}" Glyph="{x:Static fontAwesome:FontAwesomeIcons.Book}" FontFamily="FA-Solid" />
-            </Tab.Icon>
-            <ShellContent Route="entitysCalendar" Title="Calendar" ContentTemplate="{DataTemplate views:EntitysCalendarPage}" />
-            <ShellContent Route="entitysList" Title="List" ContentTemplate="{DataTemplate views:EntitysListPage}" />
-        </Tab>
-    </FlyoutItem>
-    <!-- Modify the code in the AppShell() constructor that adds the Data Pages if you add more 
-         Pages here.-->
-    <ShellContent Route="aboutPage" Title="About" ContentTemplate="{DataTemplate views:AboutPage}" >
-        <ShellContent.Icon>
-            <FontImageSource Size="{StaticResource FlyoutIconSize}" Glyph="{x:Static fontAwesome:FontAwesomeIcons.InfoCircle}" FontFamily="FA-Solid" />
-        </ShellContent.Icon>
-    </ShellContent>
-
-    <!-- Optional Templates 
-    // These may be provided inline as below or as separate classes.
-
-    // This header appears at the top of the Flyout.
-    // https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyout-header
-    <Shell.FlyoutHeaderTemplate>
-        <DataTemplate>
-            <Grid>ContentHere</Grid>
-        </DataTemplate>
-    </Shell.FlyoutHeaderTemplate>
-
-    // ItemTemplate is for ShellItems as displayed in a Flyout
-    // https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#define-flyoutitem-appearance
     <Shell.ItemTemplate>
-        <DataTemplate>
-            <ContentView>
-                Bindable Properties: Title, Icon
-            </ContentView>
+        <DataTemplate x:DataType="root:IShellIconFont">
+            <Grid Margin="0" Padding="0" ColumnSpacing="0">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <!-- This is the color of the unselected text for the labels in the flyout-->
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="#2196F3" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.BackgroundColor" Value="White" />
+                                    <!-- This is the background color of the selected icon in the flyout -->
+                                    <Setter TargetName="FlyoutItemIcon" Property="Image.BackgroundColor" Value="White" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <!-- This is the color of the selected text in the flyout -->
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="White"/>
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.BackgroundColor" Value="#2196F3" />
+                                    <!-- This is the background color of the selected icon in the flyout -->
+                                    <Setter TargetName="FlyoutItemIcon" Property="Image.BackgroundColor" Value="#2196F3" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition Width="0.8*" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="FlyoutItemIcon" Grid.Column="0" FontFamily="FA-Solid" FontSize="{StaticResource FlyoutIconSize}"
+                        Text="{Binding Glyph}" TextColor="{Binding Source={x:Reference FlyoutItemLabel}, Path=TextColor}"
+                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                        Margin="0" Padding="0"/>
+                <Label x:Name="FlyoutItemLabel" Grid.Column="1" Text="{Binding Title}" FontSize="{StaticResource FlyoutLabelFontSize}" 
+                        FontAttributes="Bold" VerticalTextAlignment="Center" HeightRequest="45" />
+            </Grid>
         </DataTemplate>
     </Shell.ItemTemplate>
-
-    // MenuItemTemplate is for MenuItems as displayed in a Flyout
-    // https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#define-menuitem-appearance
-    <Shell.MenuItemTemplate>
-        <DataTemplate>
-            <ContentView>
-                Bindable Properties: Text, Icon
-            </ContentView>
-        </DataTemplate>
-    </Shell.MenuItemTemplate>
-    -->
+    <FlyoutItem Route="root" Title="Entitys" FlyoutDisplayOptions="AsMultipleItems">
+        <root:ShellContentIconFont Route="mainPage" Title="Entity" Glyph="{x:Static fontAwesome:FontAwesomeIcons.BookOpen}" ContentTemplate="{DataTemplate views:MainPage}" />
+        <root:ShellContentIconFont Route="favoritesPage" Title="Favorites" Glyph="{x:Static fontAwesome:FontAwesomeIcons.Star}" ContentTemplate="{DataTemplate views:FavoritesPage}" />
+        <root:TabIconFont Route="entitys" Title="Entitys" Glyph="{x:Static fontAwesome:FontAwesomeIcons.Book}" >
+            <ShellContent Route="entitysCalendar" Title="Calendar" ContentTemplate="{DataTemplate views:EntitysCalendarPage}" />
+            <ShellContent Route="entitysList" Title="List" ContentTemplate="{DataTemplate views:EntitysListPage}" />
+        </root:TabIconFont>
+    </FlyoutItem>
+    <root:ShellContentIconFont Route="aboutPage" Title="About" Glyph="{x:Static fontAwesome:FontAwesomeIcons.InfoCircle}" ContentTemplate="{DataTemplate views:AboutPage}" />
 </Shell>
